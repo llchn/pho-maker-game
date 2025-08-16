@@ -1,0 +1,401 @@
+body {
+    background-image: url('./assets/hanoi.png');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    
+    color: #374151; 
+    color: #374151; 
+    font-family: 'Indie Flower', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    margin: 0;
+    cursor: url('./assets/custom-cursor.png'), auto;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 56rem; 
+    background-color: white;
+    border-radius: 1rem; 
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); /* shadow-2xl */
+    padding: 2rem;
+}
+
+/* title */
+.game-title {
+    display: block;
+    margin: 0 auto 0.5rem;
+    height: 200px; 
+}
+
+p.instruction {
+    text-align: center;
+    color: #4B5563; 
+    margin-bottom: 2rem;
+    height: 2.5rem;
+    font-family: 'Indie Flower', sans-serif; 
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
+/* typing effect */
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2rem;
+    background-color: #4B5563;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { background-color: transparent }
+    50% { background-color: #4B5563; }
+}
+
+
+.game-screen {
+    background-color: #FEF3C7; 
+    border-radius: 0.5rem; 
+    padding: 1rem;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stage-layout {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+.ingredient-grid-container {
+    width: 66.66%;
+    padding: 1rem;
+    background-image: url('./assets/wooden-shelf.png'); 
+    background-size: 100% 100%;
+    background-position: center;
+    border-radius: 0.5rem;
+    font-size: 1.25rem; 
+}
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.ingredient {
+    background-color: transparent; 
+    padding: 0.5rem; 
+    text-align: center;
+    border-radius: 0.5rem; 
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); 
+    transition: all 0.2s ease-in-out;
+    cursor: url('./assets/custom-pointer.png'), pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.ingredient img {
+    height: 150px; 
+    object-fit: contain;
+}
+
+.ingredient:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.ingredient.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+.recipe-list-container {
+    width: 33.33%;
+    background-image: url('./assets/notepad-background.png'); 
+    background-size: 100% 100%;
+    background-position: center;
+    padding: 3rem 1.5rem 1.5rem 2.5rem;;
+    border-radius: 0.5rem;
+}
+
+.recipe-list-container h3 {
+    font-weight: 700;
+    margin-top: 6rem;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.recipe-list-container ul {
+    margin-bottom: 4rem;
+    list-style-position: inside;
+    list-style-type: disc;
+    font-size: 1.5rem;
+}
+
+.recipe-list-container li.collected {
+    text-decoration: line-through;
+    color: #9CA3AF; 
+}
+
+
+.controls-container {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.timer-display, .score-display {
+    font-size: 1.125rem; 
+    font-weight: 600;
+}
+
+.timer-display {
+    background-color: #E5E7EB; 
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+.timer-display.hidden {
+    visibility: hidden;
+}
+
+.control-button {
+    background-image: url('./assets/control-button.png');
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 250px;
+    height: 150px;
+    cursor: url('./assets/custom-pointer.png'), pointer;
+    transition: transform 0.2s;
+    color: white;
+    font-weight: 700;
+    font-size: large;
+    font-family: 'Indie Flower', sans-serif;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.control-button:hover {
+    background-color: transparent;
+}
+
+
+.stage2-container, .stage3-container {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+.char-ingredients {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+.progress-bar-container {
+    width: 16rem;
+    margin: 1rem auto 0;
+    background-color: #D1D5DB; 
+    border-radius: 9999px;
+    height: 1.5rem;
+    position: relative;
+}
+.progress-bar-perfect-zone {
+    position: absolute;
+    background-color: rgba(59, 130, 246, 0.5);
+    height: 1.5rem;
+    border-radius: 9999px;
+    left: 60%;
+    width: 25%;
+}
+.progress-bar-inner {
+    background-color: #22C55E; 
+    height: 1.5rem;
+    border-radius: 9999px;
+}
+.stop-button {
+    margin-top: 1rem;
+    background-image: url('./assets/stop-button.png');
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 200px; 
+    height: 100px; 
+    cursor: url('./assets/custom-pointer.png'), pointer;
+    transition: transform 0.2s;
+}
+.stop-button:hover {
+    background-color: transparent;
+}
+
+.pot {
+    position: relative;
+    width: 24rem; 
+    height: 24rem; 
+    background-image: url('./assets/scum-pot.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+    border: none; 
+    overflow: hidden;
+}
+.scum {
+    position: absolute;
+    width: 4rem; 
+    height: 4rem; 
+    cursor: url('./assets/custom-pointer.png'), pointer;
+    transition: transform 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+
+.scum:hover {
+    transform: scale(1.1);
+}
+
+
+.assembly-ingredients {
+    width: 33.33%;
+    padding: 1rem;
+    background-color: #FDE68A; 
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.assembly-ingredients .ingredient img {
+    height: 120px;
+}
+
+.pho-bowl-container {
+    width: 66.66%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.pho-bowl-image { 
+    max-height: 350px;
+    object-fit: contain;
+}
+
+/* end screen */
+.end-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.end-screen h2 {
+    font-size: 1.875rem; 
+    font-weight: 700;
+    color: #92400E; 
+}
+.end-screen p {
+    font-size: 1.25rem; 
+    margin-top: 0.5rem;
+}
+.star-rating {
+    font-size: 3rem; 
+    margin-top: 1rem;
+}
+/*start screen*/
+.start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    height: 100%;
+}
+
+.start-screen-bowl {
+    max-height: 450px;
+    object-fit: contain;
+}
+
+.transition-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.transition-image {
+    max-height: 500px;
+    object-fit: contain;
+    animation: pop-in 0.5s ease-out;
+}
+
+@keyframes pop-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* simmer stage */
+.simmer-ingredients {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stockpot {
+    width: 30rem;
+    height: 22rem;
+    margin: 0 auto;
+    background-image: url('./assets/stockpot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.stockpot-ingredients {
+    position: absolute;
+    top: 40%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%; 
+    height: 50%; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.simmer-ingredient-img {
+    height: 60px; 
+    animation: pop-in 0.3s ease-out;
+}
